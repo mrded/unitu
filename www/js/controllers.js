@@ -23,20 +23,16 @@ angular.module('starter.controllers', [])
     }
   });
 
-  // Triggered in the login modal to close it
-  $scope.closeLogin = function() {
-    $scope.modal.hide();
-  };
-
-  // Open the login modal
-  $scope.login = function() {
+  // Delete access_token and open the login modal.
+  $scope.logout = function() {
+    auth.logout();
     $scope.modal.show();
   };
-
+  
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
     auth.login($scope.loginData.username, $scope.loginData.password).then(function() {
-      $scope.closeLogin();
+      $scope.modal.hide();
     }, function(message) {
        $ionicPopup.alert({
          title: 'Something wrong',
