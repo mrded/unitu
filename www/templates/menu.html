@@ -20,16 +20,16 @@
       <ion-list>
         <div class="item item-divider">MY UNIVERSITY</div>
         <ion-item menu-close ng-href="#/app/course/{{university.Id}}">
-          {{university.Name}}
+          {{account.University.Name}}
         </ion-item>
         
         <div class="item item-divider">COURSE HUBS</div>
-        <ion-item ng-repeat="course in courses" menu-close ng-href="#/app/course/{{course.Id}}"> 
+        <ion-item ng-repeat="course in account.Courses" menu-close ng-href="#/app/course/{{course.Id}}"> 
           {{course.Name}}
         </ion-item>
         
         <div class="item item-divider">FEEDBACK BOARDS</div>
-        <ion-item ng-repeat="department in departments" menu-close ng-href="#/app/department/{{department.Id}}"> 
+        <ion-item ng-repeat="department in account.Departments" menu-close ng-href="#/app/department/{{department.Id}}"> 
           {{department.Name}}
         </ion-item>
       </ion-list>

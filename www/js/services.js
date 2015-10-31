@@ -49,47 +49,13 @@ angular.module('starter.services', [])
   }
 })
 
-.service('courseService', function($q, $http, $log, API_ADDRESS) {
-  return {
-    all: function() {
-      var deferred = $q.defer();
-      
-      $http.get(API_ADDRESS + '/v1/Account').then(function(response) { // Success.
-        deferred.resolve(response.data.Courses);
-      }, function(response) { // Error.
-        $log.error(response);
-        deferred.reject(response.data.Message);
-      });
-      
-      return deferred.promise;
-    }
-  }
-})
-
-.service('departmentService', function($q, $http, $log, API_ADDRESS) {
-  return {
-    all: function() {
-      var deferred = $q.defer();
-      
-      $http.get(API_ADDRESS + '/v1/Account').then(function(response) { // Success.
-        deferred.resolve(response.data.Departments);
-      }, function(response) { // Error.
-        $log.error(response);
-        deferred.reject(response.data.Message);
-      });
-      
-      return deferred.promise;
-    }
-  }
-})
-
-.service('universityService', function($q, $http, $log, API_ADDRESS) {
+.service('accountService', function($q, $http, $log, API_ADDRESS) {
   return {
     get: function() {
       var deferred = $q.defer();
       
       $http.get(API_ADDRESS + '/v1/Account').then(function(response) { // Success.
-        deferred.resolve(response.data.University);
+        deferred.resolve(response.data);
       }, function(response) { // Error.
         $log.error(response);
         deferred.reject(response.data.Message);
@@ -98,5 +64,4 @@ angular.module('starter.services', [])
       return deferred.promise;
     }
   }
-})
-;
+});

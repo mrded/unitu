@@ -1,18 +1,10 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $ionicPopup, authService, courseService, departmentService, universityService) {
+.controller('AppCtrl', function($scope, $ionicModal, $ionicPopup, authService, accountService) {
   var bootstrap = function() {
-    courseService.all().then(function(courses) {
-      $scope.courses = courses;
+    accountService.get().then(function(account) {
+      $scope.account = account;
     });
-    
-    departmentService.all().then(function(departments) {
-      $scope.departments = departments;
-    });
-    
-    universityService.get().then(function(university) {
-      $scope.university = university;
-    });  
   };
   
   // Form data for the login modal
