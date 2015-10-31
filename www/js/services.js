@@ -1,6 +1,6 @@
 angular.module('starter.services', [])
 
-.factory('localStorage', function($window) {
+.factory('storageService', function($window) {
   return {
     set: function(key, value) {
       $window.localStorage[key] = value;
@@ -17,10 +17,10 @@ angular.module('starter.services', [])
   }
 })
 
-.service('auth', function($q, $http, $log, localStorage, API_ADDRESS) {
+.service('authService', function($q, $http, $log, storageService, API_ADDRESS) {
   return {
     token: function() {
-      return localStorage.get('access_token', '');
+      return storageService.get('access_token', '');
     },
     login: function(username, password) {
       var deferred = $q.defer();
@@ -32,7 +32,7 @@ angular.module('starter.services', [])
       $http.post(url).then(function(response) { // Success.
         var token = response.data.token_type + ' ' + response.data.access_token;
         
-        localStorage.set('access_token', token);
+        storageService.set('access_token', token);
         $http.defaults.headers.common.Authorization = token;
         
         deferred.resolve(response.data.access_token);
@@ -44,12 +44,12 @@ angular.module('starter.services', [])
       return deferred.promise;
     },
     logout: function() {
-      localStorage.set('access_token', '');
+      storageService.set('access_token', '');
     }
   }
 })
 
-.service('course', function($q, $http, $log, API_ADDRESS) {
+.service('courseService', function($q, $http, $log, API_ADDRESS) {
   return {
     all: function() {
       var deferred = $q.defer();
@@ -66,7 +66,7 @@ angular.module('starter.services', [])
   }
 })
 
-.service('department', function($q, $http, $log, API_ADDRESS) {
+.service('departmentService', function($q, $http, $log, API_ADDRESS) {
   return {
     all: function() {
       var deferred = $q.defer();
@@ -83,7 +83,7 @@ angular.module('starter.services', [])
   }
 })
 
-.service('university', function($q, $http, $log, API_ADDRESS) {
+.service('universityService', function($q, $http, $log, API_ADDRESS) {
   return {
     get: function() {
       var deferred = $q.defer();

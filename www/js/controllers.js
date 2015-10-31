@@ -1,16 +1,16 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $ionicPopup, auth, course, department, university) {
+.controller('AppCtrl', function($scope, $ionicModal, $ionicPopup, authService, courseService, departmentService, universityService) {
   var bootstrap = function() {
-    course.all().then(function(courses) {
+    courseService.all().then(function(courses) {
       $scope.courses = courses;
     });
     
-    department.all().then(function(departments) {
+    departmentService.all().then(function(departments) {
       $scope.departments = departments;
     });
     
-    university.get().then(function(university) {
+    universityService.get().then(function(university) {
       $scope.university = university;
     });  
   };
@@ -24,7 +24,7 @@ angular.module('starter.controllers', [])
   }).then(function(modal) {
     $scope.modal = modal;
     
-    if (auth.token() === '') {
+    if (authService.token() === '') {
       $scope.modal.show();  
     } else {
       bootstrap();
@@ -33,13 +33,13 @@ angular.module('starter.controllers', [])
 
   // Delete access_token and open the login modal.
   $scope.logout = function() {
-    auth.logout();
+    authService.logout();
     $scope.modal.show();
   };
   
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
-    auth.login($scope.loginData.username, $scope.loginData.password).then(function() {
+    authService.login($scope.loginData.username, $scope.loginData.password).then(function() {
       $scope.modal.hide();
       bootstrap();
     }, function(message) {

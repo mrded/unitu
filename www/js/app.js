@@ -6,8 +6,8 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
-.run(function($ionicPlatform, $http, auth) {
-  $http.defaults.headers.common.Authorization = auth.token();
+.run(function($ionicPlatform, $http, authService) {
+  $http.defaults.headers.common.Authorization = authService.token();
   
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
