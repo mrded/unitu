@@ -14,23 +14,29 @@
 
   <ion-side-menu side="left">
     <ion-header-bar class="bar-stable">
-      <h1 class="title">Left</h1>
+      <h1 class="title">{{account.FullName}}</h1>
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item menu-close ng-click="logout()">
-          Logout
+        <div class="item item-divider">MY UNIVERSITY</div>
+        <ion-item menu-close ng-href="#/app/course/{{university.Id}}">
+          {{university.Name}}
         </ion-item>
-        <ion-item menu-close href="#/app/search">
-          Search
+        
+        <div class="item item-divider">COURSE HUBS</div>
+        <ion-item ng-repeat="course in courses" menu-close ng-href="#/app/course/{{course.Id}}"> 
+          {{course.Name}}
         </ion-item>
-        <ion-item menu-close href="#/app/browse">
-          Browse
-        </ion-item>
-        <ion-item menu-close href="#/app/playlists">
-          Playlists
+        
+        <div class="item item-divider">FEEDBACK BOARDS</div>
+        <ion-item ng-repeat="department in departments" menu-close ng-href="#/app/department/{{department.Id}}"> 
+          {{department.Name}}
         </ion-item>
       </ion-list>
     </ion-content>
+    
+    <ion-footer-bar>
+      <button class="button button-clear pull-right" menu-close ng-click="logout()">Logout</button>
+    </ion-footer-bar>
   </ion-side-menu>
 </ion-side-menus>

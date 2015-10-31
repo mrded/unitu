@@ -1,14 +1,20 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $ionicPopup, auth) {
-
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
-
+.controller('AppCtrl', function($scope, $ionicModal, $ionicPopup, auth, course, department, university) {
+  var bootstrap = function() {
+    course.all().then(function(courses) {
+      $scope.courses = courses;
+    });
+    
+    department.all().then(function(departments) {
+      $scope.departments = departments;
+    });
+    
+    university.get().then(function(university) {
+      $scope.university = university;
+    });  
+  };
+  
   // Form data for the login modal
   $scope.loginData = {};
 
@@ -20,6 +26,8 @@ angular.module('starter.controllers', [])
     
     if (auth.token() === '') {
       $scope.modal.show();  
+    } else {
+      bootstrap();
     }
   });
 
@@ -33,6 +41,7 @@ angular.module('starter.controllers', [])
   $scope.doLogin = function() {
     auth.login($scope.loginData.username, $scope.loginData.password).then(function() {
       $scope.modal.hide();
+      bootstrap();
     }, function(message) {
        $ionicPopup.alert({
          title: 'Something wrong',
