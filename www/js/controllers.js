@@ -17,7 +17,7 @@ angular.module('unitu.controllers', [])
     $scope.modal = modal;
     
     if (authService.token() === '') {
-      $scope.modal.show();  
+      $scope.modal.show();
     } else {
       bootstrap();
     }
@@ -46,10 +46,39 @@ angular.module('unitu.controllers', [])
 .controller('mainCtrl', function($scope) {
 })
 
-.controller('courseCtrl', function($scope, $stateParams, courseService) {
+.controller('courseCtrl', function($scope, $stateParams, $ionicModal, courseService, postService) {
   courseService.get($stateParams.courseId).then(function(course) {
     $scope.course = course;
   });
+  
+  $ionicModal.fromTemplateUrl('templates/post-create.html', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+
+  $scope.addPost = function() {
+    $scope.modal.show();
+  };
+  
+  $scope.close = function() {
+    $scope.modal.hide();
+  };
+  
+  $scope.post = function(courseId, text, anonymous) {
+    var data = {
+      CourseId: courseId,
+      CreatorId: "7a838b72-8ad3-41a1-bd30-db4130ce731d",
+      Text: text,
+      PostedAnonymously: anonymous || false
+    };
+    
+    postService.create(data).then(function(post) {
+      console.log('-> post', post);
+      //@TODO: reload posts.
+      $scope.modal.hide();
+    });
+  };
 })
 
 .controller('postCtrl', function($scope, $stateParams, postService) {

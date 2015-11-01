@@ -2,6 +2,9 @@
   <ion-nav-title>
     {{course.Name}}
   </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <button menu-toggle="right" class="button button-icon ion-compose" ng-click="addPost()"></button>
+  </ion-nav-buttons>
     
   <ion-content>
     <post ng-repeat="post in course.Posts" data="post"></post>

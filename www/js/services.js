@@ -96,6 +96,18 @@ angular.module('unitu.services', [])
       });
       
       return deferred.promise;
+    },
+    create: function(post) {
+      var deferred = $q.defer();
+      
+      $http.post(API_ADDRESS + '/v1/courses/' + post.coursesId + '/addpost', post).then(function(response) { // Success.
+        deferred.resolve(response.data);
+      }, function(response) { // Error.
+        $log.error(response);
+        deferred.reject(response.data.Message);
+      });
+      
+      return deferred.promise;
     }
   }
 });
