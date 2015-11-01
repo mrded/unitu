@@ -71,7 +71,7 @@ angular.module('unitu.controllers', [])
     $scope.modal.hide();
   };
   
-  $scope.post = function(courseId, text, anonymous) {
+  $scope.submit = function(courseId, text, anonymous) {
     accountService.get().then(function(account) {
       var data = {
         CourseId: courseId,
@@ -80,7 +80,7 @@ angular.module('unitu.controllers', [])
         PostedAnonymously: anonymous || false
       };
       
-      postService.create(data).then(function(post) {
+      postService.create(data).then(function() {
         $scope.refresh();
         $scope.modal.hide();
       });
@@ -88,8 +88,27 @@ angular.module('unitu.controllers', [])
   };
 })
 
-.controller('postCtrl', function($scope, $stateParams, postService) {
-  postService.get($stateParams.postId).then(function(post) {
-    $scope.post = post;
-  });
+.controller('postCtrl', function($scope, $stateParams, postService, accountService, commentService) {
+  $scope.refresh = function() {
+    postService.get($stateParams.postId).then(function(post) {
+      $scope.post = post;
+      $scope.$broadcast('scroll.refreshComplete');
+    }); 
+  };
+  
+  $scope.refresh();
+  
+  $scope.submit = function(postId, text) {
+    accountService.get().then(function(account) {
+      var data = {
+        PostId: postId,
+        CreatorId: account.Id,
+        Text: text
+      };
+      
+      commentService.create(data).then(function() {
+        $scope.refresh();  
+      });
+    });
+  };
 });

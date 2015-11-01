@@ -110,4 +110,21 @@ angular.module('unitu.services', [])
       return deferred.promise;
     }
   }
+})
+
+.service('commentService', function($q, $http, $log, API_ADDRESS) {
+  return {
+    create: function(comment) {
+      var deferred = $q.defer();
+      
+      $http.post(API_ADDRESS + '/v1/posts/' + comment.PostId + '/addcomment', comment).then(function(response) { // Success.
+        deferred.resolve(response.data);
+      }, function(response) { // Error.
+        $log.error(response);
+        deferred.reject(response.data.Message);
+      });
+      
+      return deferred.promise;
+    }
+  }
 });

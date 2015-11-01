@@ -3,8 +3,19 @@
     {{course.Name}}
   </ion-nav-title>
   <ion-content>
+    <ion-refresher on-refresh="refresh()"></ion-refresher>
+    
     <post data="post"></post>
     
     <comment ng-repeat="comment in post.Comments" data="comment"></comment>
   </ion-content>
+  
+  <form name="form" class="bar bar-footer item-input-inset">
+    <label class="item-input-wrapper">
+      <input type="text" placeholder="Have your say..." ng-model="newComment.Text" required>
+    </label>
+    <button class="button button-clear" ng-disabled="form.$invalid" ng-click="submit(post.Id, newComment.Text)">
+      Send
+    </button>
+  </form>
 </ion-view>
