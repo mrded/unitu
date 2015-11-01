@@ -2,7 +2,7 @@
   <ion-content>
     <ion-refresher on-refresh="refresh()"></ion-refresher>
     
-    <div class="card">
+    <div class="card" ng-if="account">
       <div class="item item-avatar">
         <img ng-src="{{account.Avatar}}">
         <h2>{{account.FullName}}</h2>
@@ -10,16 +10,16 @@
       </div>
     </div>
     
-    <div class="card">
+    <div class="card" ng-if="account">
       <div class="item item-divider">
         My University
       </div>
-      <ion-item ng-href="#/app/university/{{university.Id}}">
+      <ion-item ng-href="#/app/not-ready">
         {{account.University.Name}}
       </ion-item>
     </div>
     
-    <div class="card">
+    <div class="card" ng-if="account">
       <div class="item item-divider">
         Course HUBs
       </div>
@@ -28,11 +28,11 @@
       </ion-item>
     </div>
     
-    <div class="card">
+    <div class="card" ng-if="account">
       <div class="item item-divider">
         Feedback Boards
       </div>
-      <ion-item ng-repeat="department in account.Departments" ng-href="#/app/department/{{department.Id}}"> 
+      <ion-item ng-repeat="department in account.Departments" ng-href="#/app/not-ready"> 
         {{department.Name}}
       </ion-item>
     </div>
