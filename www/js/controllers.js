@@ -50,4 +50,10 @@ angular.module('starter.controllers', [])
   courseService.get($stateParams.courseId).then(function(course) {
     $scope.course = course;
   });
+})
+
+.controller('postCtrl', function($scope, $stateParams, postService) {
+  postService.get($stateParams.postId).then(function(post) {
+    $scope.post = post;
+  });
 });

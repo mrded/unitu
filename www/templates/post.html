@@ -2,8 +2,9 @@
   <ion-nav-title>
     {{course.Name}}
   </ion-nav-title>
-    
   <ion-content>
-    <post ng-repeat="post in course.Posts" data="post"></post>
+    <post data="post"></post>
+    
+    <comment ng-repeat="comment in post.Comments" data="comment"></comment>
   </ion-content>
 </ion-view>

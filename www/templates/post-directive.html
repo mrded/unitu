@@ -1,0 +1,32 @@
+<div class="list card">
+  <div class="item" ng-if="post.PostedAnonymously">
+    <h2>Anonymous Peer</h2>
+    <p>{{post.CreationDate}}</p>
+  </div>
+  
+  <div class="item item-avatar" ng-if="!post.PostedAnonymously">
+    <img ng-src="{{post.Creator.Avatar}}">
+    <h2>{{post.Creator.FullName}}</h2>
+    <p>{{post.CreationDate}}</p>
+  </div>
+
+  <div class="item item-body">
+    <p>{{post.Text}}</p>
+  </div>
+
+  <div class="item tabs tabs-secondary tabs-icon-left">
+    <a class="tab-item" href="#">
+      <i class="icon ion-thumbsup"></i>
+      {{post.Voting.VotedPositive}}
+    </a>
+    <a class="tab-item" href="#">
+      <i class="icon ion-thumbsdown"></i>
+      {{post.Voting.VotedNegative}}
+    </a>
+    
+    <a class="tab-item" ng-href="#/app/post/{{post.Id}}">
+      <i class="icon ion-chatbox"></i>
+      {{post.Comments.length}}
+    </a>
+  </div>
+</div>

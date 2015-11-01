@@ -1,0 +1,18 @@
+<div class="list card">
+  <div class="item" ng-if="comment.PostedAnonymously">
+    <h2>Anonymous Peer</h2>
+    <p>{{comment.CreationDate}}</p>
+  </div>
+  
+  <div class="item item-avatar" ng-if="!comment.PostedAnonymously">
+    <img ng-src="{{comment.Creator.Avatar}}">
+    <h2>{{comment.Creator.FullName}}</h2>
+
+    <p>{{comment.Text}}</p>
+    
+    <p>
+      <span class="subdued"><i class="icon ion-ios-clock-outline"></i> {{comment.CreationDate}}</span>
+      <a href="#" class="subdued">Like - {{comment.Likes}}</a>
+    </p>
+  </div>
+</div>

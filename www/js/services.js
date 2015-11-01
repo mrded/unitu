@@ -81,4 +81,21 @@ angular.module('starter.services', [])
       return deferred.promise;
     }
   }
+})
+
+.service('postService', function($q, $http, $log, API_ADDRESS) {
+  return {
+    get: function(id) {
+      var deferred = $q.defer();
+      
+      $http.get(API_ADDRESS + '/v1/Posts/' + id).then(function(response) { // Success.
+        deferred.resolve(response.data);
+      }, function(response) { // Error.
+        $log.error(response);
+        deferred.reject(response.data.Message);
+      });
+      
+      return deferred.promise;
+    }
+  }
 });
