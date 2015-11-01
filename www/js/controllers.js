@@ -81,6 +81,8 @@ angular.module('unitu.controllers', [])
   };
   
   $scope.submit = function(courseId, text, anonymous) {
+    $ionicLoading.show();
+    
     accountService.get().then(function(account) {
       var data = {
         CourseId: courseId,
@@ -111,6 +113,8 @@ angular.module('unitu.controllers', [])
   $scope.refresh();
   
   $scope.submit = function(postId, text) {
+    $ionicLoading.show();
+    
     accountService.get().then(function(account) {
       var data = {
         PostId: postId,
