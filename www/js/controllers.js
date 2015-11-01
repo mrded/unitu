@@ -1,9 +1,10 @@
 angular.module('unitu.controllers', [])
 
 .controller('AppCtrl', function($scope, $ionicModal, $ionicPopup, authService, accountService) {
-  var bootstrap = function() {
+  $scope.refresh = function() {
     accountService.get().then(function(account) {
       $scope.account = account;
+      $scope.$broadcast('scroll.refreshComplete');
     });
   };
   
@@ -19,7 +20,7 @@ angular.module('unitu.controllers', [])
     if (authService.token() === '') {
       $scope.modal.show();
     } else {
-      bootstrap();
+      $scope.refresh();
     }
   });
 
@@ -33,7 +34,7 @@ angular.module('unitu.controllers', [])
   $scope.doLogin = function() {
     authService.login($scope.loginData.username, $scope.loginData.password).then(function() {
       $scope.modal.hide();
-      bootstrap();
+      $scope.refresh();
     }, function(message) {
        $ionicPopup.alert({
          title: 'Something wrong',
@@ -46,10 +47,15 @@ angular.module('unitu.controllers', [])
 .controller('mainCtrl', function($scope) {
 })
 
-.controller('courseCtrl', function($scope, $stateParams, $ionicModal, courseService, postService) {
-  courseService.get($stateParams.courseId).then(function(course) {
-    $scope.course = course;
-  });
+.controller('courseCtrl', function($scope, $stateParams, $ionicModal, courseService, postService, accountService) {
+  $scope.refresh = function() {
+    courseService.get($stateParams.courseId).then(function(course) {
+      $scope.course = course;
+      $scope.$broadcast('scroll.refreshComplete');
+    });
+  } ;
+  
+  $scope.refresh();
   
   $ionicModal.fromTemplateUrl('templates/post-create.html', {
     scope: $scope
@@ -66,17 +72,18 @@ angular.module('unitu.controllers', [])
   };
   
   $scope.post = function(courseId, text, anonymous) {
-    var data = {
-      CourseId: courseId,
-      CreatorId: "7a838b72-8ad3-41a1-bd30-db4130ce731d",
-      Text: text,
-      PostedAnonymously: anonymous || false
-    };
-    
-    postService.create(data).then(function(post) {
-      console.log('-> post', post);
-      //@TODO: reload posts.
-      $scope.modal.hide();
+    accountService.get().then(function(account) {
+      var data = {
+        CourseId: courseId,
+        CreatorId: account.Id,
+        Text: text,
+        PostedAnonymously: anonymous || false
+      };
+      
+      postService.create(data).then(function(post) {
+        $scope.refresh();
+        $scope.modal.hide();
+      });
     });
   };
 })
