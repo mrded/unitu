@@ -25,7 +25,7 @@ angular.module('unitu.controllers', [])
     } else {
       $scope.refresh();
     }
-  });
+  }, $ionicLoading.hide);
 
   // Delete access_token and open the login modal.
   $scope.logout = function() {
@@ -61,8 +61,8 @@ angular.module('unitu.controllers', [])
       $scope.course = course;
       $scope.$broadcast('scroll.refreshComplete');
       $ionicLoading.hide();
-    });
-  } ;
+    }, $ionicLoading.hide);
+  };
   
   $scope.refresh();
   
@@ -94,8 +94,8 @@ angular.module('unitu.controllers', [])
       postService.create(data).then(function() {
         $scope.refresh();
         $scope.modal.hide();
-      });
-    });
+      }, $ionicLoading.hide);
+    }, $ionicLoading.hide);
   };
 })
 
@@ -107,7 +107,7 @@ angular.module('unitu.controllers', [])
       $scope.post = post;
       $scope.$broadcast('scroll.refreshComplete');
       $ionicLoading.hide();
-    }); 
+    }, $ionicLoading.hide); 
   };
   
   $scope.refresh();
@@ -124,7 +124,7 @@ angular.module('unitu.controllers', [])
       
       commentService.create(data).then(function() {
         $scope.refresh();  
-      });
-    });
+      }, $ionicLoading.hide);
+    }, $ionicLoading.hide);
   };
 });
