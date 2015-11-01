@@ -4,7 +4,6 @@
   </ion-nav-title>
     
   <ion-content>
-    
     <div class="list card" ng-repeat="post in course.Posts">
       
       <div class="item" ng-if="post.PostedAnonymously">
@@ -34,10 +33,9 @@
         
         <a class="tab-item" href="#">
           <i class="icon ion-chatbox"></i>
-          1
+          {{post.Comments.length}}
         </a>
       </div>
     </div>
-    
   </ion-content>
 </ion-view>
