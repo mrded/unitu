@@ -1,0 +1,38 @@
+<ion-view view-title="Unitu">
+  <ion-content>
+    <div class="card">
+      <div class="item item-avatar">
+        <img ng-src="{{account.Avatar}}">
+        <h2>{{account.FullName}}</h2>
+        <p>{{account.Year}} at {{account.University.ShortName}}</p>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="item item-divider">
+        My University
+      </div>
+      <ion-item ng-href="#/app/course/{{university.Id}}">
+        {{account.University.Name}}
+      </ion-item>
+    </div>
+    
+    <div class="card">
+      <div class="item item-divider">
+        Course HUBs
+      </div>
+      <ion-item ng-repeat="course in account.Courses" ng-href="#/app/course/{{course.Id}}"> 
+        {{course.Name}}
+      </ion-item>
+    </div>
+    
+    <div class="card">
+      <div class="item item-divider">
+        Feedback Boards
+      </div>
+      <ion-item ng-repeat="department in account.Departments" ng-href="#/app/department/{{department.Id}}"> 
+        {{department.Name}}
+      </ion-item>
+    </div>
+  </ion-content>
+</ion-view>
