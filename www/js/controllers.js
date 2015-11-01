@@ -25,7 +25,7 @@ angular.module('unitu.controllers', [])
     } else {
       $scope.refresh();
     }
-  }, $ionicLoading.hide);
+  }, $ionicLoading.hide); // Error.
 
   // Delete access_token and open the login modal.
   $scope.logout = function() {
@@ -40,7 +40,7 @@ angular.module('unitu.controllers', [])
     authService.login($scope.loginData.username, $scope.loginData.password).then(function() {
       $scope.modal.hide();
       $scope.refresh();
-    }, function(message) {
+    }, function(message) { // Error.
       $ionicLoading.hide();
       $ionicPopup.alert({
         title: 'Something wrong',
@@ -61,7 +61,7 @@ angular.module('unitu.controllers', [])
       $scope.course = course;
       $scope.$broadcast('scroll.refreshComplete');
       $ionicLoading.hide();
-    }, $ionicLoading.hide);
+    }, $ionicLoading.hide); // Error. 
   };
   
   $scope.refresh();
@@ -94,8 +94,8 @@ angular.module('unitu.controllers', [])
       postService.create(data).then(function() {
         $scope.refresh();
         $scope.modal.hide();
-      }, $ionicLoading.hide);
-    }, $ionicLoading.hide);
+      }, $ionicLoading.hide); // Error.
+    }, $ionicLoading.hide); // Error.
   };
 })
 
@@ -107,7 +107,7 @@ angular.module('unitu.controllers', [])
       $scope.post = post;
       $scope.$broadcast('scroll.refreshComplete');
       $ionicLoading.hide();
-    }, $ionicLoading.hide); 
+    }, $ionicLoading.hide); // Error.
   };
   
   $scope.refresh();
@@ -124,7 +124,7 @@ angular.module('unitu.controllers', [])
       
       commentService.create(data).then(function() {
         $scope.refresh();  
-      }, $ionicLoading.hide);
-    }, $ionicLoading.hide);
+      }, $ionicLoading.hide); // Error.
+    }, $ionicLoading.hide); // Error.
   };
 });
