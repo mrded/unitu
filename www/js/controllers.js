@@ -1,4 +1,4 @@
-angular.module('starter.controllers', [])
+angular.module('unitu.controllers', [])
 
 .controller('AppCtrl', function($scope, $ionicModal, $ionicPopup, authService, accountService) {
   var bootstrap = function() {

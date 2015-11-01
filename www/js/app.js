@@ -1,10 +1,4 @@
-// Ionic Starter App
-
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'starter.directives'])
+angular.module('unitu', ['ionic', 'unitu.controllers', 'unitu.services', 'unitu.directives'])
 
 .run(function($ionicPlatform, $http, authService) {
   $http.defaults.headers.common.Authorization = authService.token();
@@ -35,32 +29,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     controller: 'AppCtrl'
   })
 
-  .state('app.search', {
-    url: '/search',
+  .state('app.main', {
+    url: '/playlists',
     views: {
       'menuContent': {
-        templateUrl: 'templates/search.html'
+        templateUrl: 'templates/main.html',
+        controller: 'mainCtrl'
       }
     }
   })
-
-  .state('app.browse', {
-      url: '/browse',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/browse.html'
-        }
-      }
-    })
-    .state('app.main', {
-      url: '/playlists',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/main.html',
-          controller: 'mainCtrl'
-        }
-      }
-    })
 
   .state('app.course', {
     url: '/course/:courseId',
@@ -81,6 +58,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       }
     }
   });
+  
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/main');
 });

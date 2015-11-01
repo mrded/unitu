@@ -1,4 +1,4 @@
-angular.module('starter.directives', [])
+angular.module('unitu.directives', [])
 
 .directive('post', function() {
   return {
