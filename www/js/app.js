@@ -30,7 +30,7 @@ angular.module('unitu', ['ionic', 'unitu.controllers', 'unitu.services', 'unitu.
   })
 
   .state('app.main', {
-    url: '/playlists',
+    url: '/main',
     views: {
       'menuContent': {
         templateUrl: 'templates/main.html',
