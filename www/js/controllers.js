@@ -1,10 +1,13 @@
 angular.module('unitu.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $ionicPopup, authService, accountService) {
+.controller('AppCtrl', function($scope, $ionicModal, $ionicPopup, $ionicLoading, authService, accountService) {
   $scope.refresh = function() {
+    $ionicLoading.show();
+    
     accountService.get().then(function(account) {
       $scope.account = account;
       $scope.$broadcast('scroll.refreshComplete');
+      $ionicLoading.hide();
     });
   };
   
@@ -32,14 +35,17 @@ angular.module('unitu.controllers', [])
   
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
+    $ionicLoading.show();
+    
     authService.login($scope.loginData.username, $scope.loginData.password).then(function() {
       $scope.modal.hide();
       $scope.refresh();
     }, function(message) {
-       $ionicPopup.alert({
-         title: 'Something wrong',
-         template: 'It may be username with password, or just internet connection.'
-       });
+      $ionicLoading.hide();
+      $ionicPopup.alert({
+        title: 'Something wrong',
+        template: 'It may be username with password, or just internet connection.'
+      });
     });
   };
 })
@@ -47,11 +53,14 @@ angular.module('unitu.controllers', [])
 .controller('mainCtrl', function($scope) {
 })
 
-.controller('courseCtrl', function($scope, $stateParams, $ionicModal, courseService, postService, accountService) {
+.controller('courseCtrl', function($scope, $stateParams, $ionicModal, $ionicLoading, courseService, postService, accountService) {
   $scope.refresh = function() {
+    $ionicLoading.show();
+    
     courseService.get($stateParams.courseId).then(function(course) {
       $scope.course = course;
       $scope.$broadcast('scroll.refreshComplete');
+      $ionicLoading.hide();
     });
   } ;
   
@@ -88,11 +97,14 @@ angular.module('unitu.controllers', [])
   };
 })
 
-.controller('postCtrl', function($scope, $stateParams, postService, accountService, commentService) {
+.controller('postCtrl', function($scope, $stateParams, $ionicLoading, postService, accountService, commentService) {
   $scope.refresh = function() {
+    $ionicLoading.show();
+    
     postService.get($stateParams.postId).then(function(post) {
       $scope.post = post;
       $scope.$broadcast('scroll.refreshComplete');
+      $ionicLoading.hide();
     }); 
   };
   
