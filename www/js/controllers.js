@@ -46,5 +46,8 @@ angular.module('starter.controllers', [])
 .controller('mainCtrl', function($scope) {
 })
 
-.controller('PlaylistCtrl', function($scope, $stateParams) {
+.controller('courseCtrl', function($scope, $stateParams, courseService) {
+  courseService.get($stateParams.courseId).then(function(course) {
+    $scope.course = course;
+  });
 });
