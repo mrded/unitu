@@ -38,6 +38,15 @@ angular.module('unitu', ['ionic', 'unitu.controllers', 'unitu.services', 'unitu.
       }
     }
   })
+  
+  .state('app.notReady', {
+    url: '/not-ready',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/not-ready.html',
+      }
+    }
+  })
 
   .state('app.course', {
     url: '/course/:courseId',
