@@ -24,12 +24,8 @@ angular.module('unitu.services', [])
     },
     login: function(username, password) {
       var deferred = $q.defer();
-      
-      var url = API_ADDRESS + "/v1/auth/token?username=:username&password=:password"
-        .replace(':username', username)
-        .replace(':password', password);
-      
-      $http.post(url).then(function(response) { // Success.
+
+      $http.post("/v1/auth/token", {params: {username: username, password: password}}).then(function(response) { // Success.
         var token = response.data.token_type + ' ' + response.data.access_token;
         
         storageService.set('access_token', token);
